@@ -28,8 +28,34 @@ void add(float** A, float** B, float** C, const int N)
 
 void mult(float** A, float** B, float** C, const int N) 
 {
-
+    #pragma omp for schedule(dynamic)
+    for (int i = 0; i < N; i++)
+    {
+        float temp;
+        for (int j = 0; j < N; j++) 
+        {
+            temp = 0.0;
+            for (int k = 0; k < N; k++)
+            {
+                temp += A[i][j] * B[j][i];
+            }
+            C[i][j] = temp;
+        }
+    }
 }
 
+float det(float **A, const int N)
+{
 
+    return 0.0f;
+}
 
+float trace(float **A, const int N)
+{
+
+    return 0.0f;
+}
+
+void eigenvalues(float **A, float *b, const int N)
+{
+}

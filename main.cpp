@@ -1,11 +1,12 @@
 #include <iostream>
 #include <random>
+#include <ctime>
 #include <omp.h>
 #include "matrix.h"
 
 int main(int argc, char* argv[]) {
 
-    const int N = 10;
+    const int N = 1000;
 
     std::cout << "Size of matrix: " << N << " x " << N << std::endl;
     std::cout << "Size of float: " << sizeof(float) << std::endl;
@@ -36,7 +37,7 @@ int main(int argc, char* argv[]) {
     }
 
     add(A, B, C, N);
-    print(C, N);
+    //print(C, N);
 
     for (i = 0; i < N; i++) 
     { 

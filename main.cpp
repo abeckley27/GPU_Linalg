@@ -35,8 +35,8 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    add(A, B, C);
-    
+    add(A, B, C, N);
+    print(C, N);
 
     for (i = 0; i < N; i++) 
     { 

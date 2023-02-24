@@ -7,14 +7,14 @@
 int main(int argc, char* argv[]) {
 
     const double t0 = omp_get_wtime();
-    const int N = 1000;
+    const int N = 5000;
 
     std::cout << "Size of matrix: " << N << " x " << N << std::endl;
     std::cout << "Size of float: " << sizeof(float) << std::endl;
 
     std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> dist(0.0, 10.0);
+	std::uniform_int_distribution<> dist(0, 10);
 
     int i, j;
     //Allocate dynamic 2D arrays, A, B, and C
@@ -41,9 +41,16 @@ int main(int argc, char* argv[]) {
     const double t1 = omp_get_wtime();
     std::cout << t1 - t0 << " Arrays initialized\n"; 
 
+    int nThreads = 0;
+    #pragma omp parallel default(none) shared(nThreads)
+    {
+      nThreads = omp_get_num_threads();
+    }
+
+    std::cout << "Number of threads: " << nThreads << std::endl;
+
     add(A, B, C, N);
     mult(C, B, A, N);
-
 
     double t2 = omp_get_wtime();
     std::cout << t2 - t1 << " Operations complete\n"; 
